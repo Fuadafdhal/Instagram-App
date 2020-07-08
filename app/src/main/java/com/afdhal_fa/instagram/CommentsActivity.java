@@ -1,6 +1,5 @@
 package com.afdhal_fa.instagram;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -63,14 +62,17 @@ public class CommentsActivity extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        postid = intent.getStringExtra("postid");
+        publisherid = intent.getStringExtra("publisherid");
+
         recyclerView = findViewById(R.id.recycle_view);
         recyclerView.setHasFixedSize(true);
-        Context context;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         commentList = new ArrayList<>();
-        commentAdapter = new CommentAdapter(this, commentList);
+        commentAdapter = new CommentAdapter(this, commentList, postid);
         recyclerView.setAdapter(commentAdapter);
 
         addcomment = findViewById(R.id.add_comment);
@@ -79,9 +81,7 @@ public class CommentsActivity extends AppCompatActivity {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        Intent intent = getIntent();
-        postid = intent.getStringExtra("postid");
-        publisherid = intent.getStringExtra("publisherid");
+
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,9 +101,12 @@ public class CommentsActivity extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Comments")
                 .child(postid);
 
-        Comment comment = new Comment(addcomment.getText().toString(), firebaseUser.getUid());
+        String commentid = reference.push().getKey();
 
-        reference.push().setValue(comment);
+        Comment comment = new Comment(addcomment.getText().toString(), firebaseUser.getUid(), commentid);
+
+        assert commentid != null;
+        reference.child(commentid).setValue(comment);
         addNotification();
         addcomment.setText("");
     }

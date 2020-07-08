@@ -369,7 +369,7 @@ public class ProfileFragment extends Fragment {
                     }
                 }
 
-                myFotosAdapter_saves.notifyDataSetChanged();
+
             }
 
             @Override
