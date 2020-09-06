@@ -1,7 +1,6 @@
 package com.afdhal_fa.instagram;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -55,7 +54,6 @@ public class RegisterActivity extends AppCompatActivity {
         regiter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context;
                 pd = new ProgressDialog(RegisterActivity.this);
                 pd.setMessage("Please wait..");
                 pd.show();

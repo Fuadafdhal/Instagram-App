@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context;
                 final ProgressDialog pd = new ProgressDialog(v.getContext());
                 pd.setMessage("Pleace wait...");
                 pd.show();
@@ -76,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 pd.dismiss();
-                                                Uri uri;
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);

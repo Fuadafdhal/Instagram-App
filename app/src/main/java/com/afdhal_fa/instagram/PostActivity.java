@@ -101,7 +101,6 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void uploadImage() {
-        Context context;
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage("Posting");
         dialog.show();
